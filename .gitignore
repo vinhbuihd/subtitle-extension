@@ -1,0 +1,15 @@
+# Local subtitle/media files are personal data and should not be committed.
+subtitle/
+*.srt
+*.vtt
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.webm
+
+# OS/editor noise.
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
