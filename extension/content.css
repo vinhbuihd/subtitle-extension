@@ -18,6 +18,10 @@
     sans-serif;
 }
 
+.mes-panel[hidden] {
+  display: none;
+}
+
 .mes-panel * {
   box-sizing: border-box;
 }
