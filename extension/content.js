@@ -60,6 +60,7 @@
 
   if (!isTopFrame) return;
   if (document.querySelector(".mes-panel")) return;
+  if (!isHtmlDocument()) return;
 
   let activeVideoState = null;
   let activeVideoSeenAt = 0;
@@ -330,6 +331,14 @@
   function findVideo() {
     const videos = [...document.querySelectorAll("video")];
     return videos.find((item) => item.duration || item.currentSrc || item.src) || videos[0] || null;
+  }
+
+  function isHtmlDocument() {
+    return (
+      document instanceof HTMLDocument ||
+      document.contentType === "text/html" ||
+      document.contentType === "application/xhtml+xml"
+    );
   }
 
   function setUiEnabled(nextEnabled) {
