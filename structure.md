@@ -28,6 +28,13 @@ Important parts:
 - Adds the `storage` permission for saved subtitle library data.
 - Injects `content.js` and `content.css` into all pages and frames.
 - Uses `all_frames` so it can detect videos inside iframe players.
+- Defines an extension toolbar action backed by `background.js`.
+
+### `extension/background.js`
+
+Small service worker for the extension toolbar icon. When you click the icon, it
+sends a toggle message to the active tab so the subtitle UI appears or hides on
+demand.
 
 ### `extension/content.js`
 
@@ -36,6 +43,7 @@ Main extension logic.
 Main responsibilities:
 
 - Inject the subtitle control panel into the top page.
+- Keep the UI hidden until the extension icon is clicked.
 - Detect HTML5 videos in the page or iframe players.
 - Bridge video status from iframe players back to the panel.
 - Sync subtitles with the real video time.
@@ -64,6 +72,7 @@ Main areas:
 
 1. Load `extension/` as an unpacked extension.
 2. Open a movie page.
-3. Press `CC` to import subtitle files.
-4. Use the panel controls or hide the panel and read the floating subtitle.
-5. Use `Lib` later to load saved subtitles.
+3. Click the extension icon to show the panel.
+4. Press `CC` to import subtitle files.
+5. Use the panel controls or hide the panel and read the floating subtitle.
+6. Use `Lib` later to load saved subtitles.

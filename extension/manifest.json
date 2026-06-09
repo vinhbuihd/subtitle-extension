@@ -4,6 +4,12 @@
   "version": "0.1.0",
   "description": "Show synced local English subtitles beside an HTML5 video.",
   "permissions": ["storage"],
+  "action": {
+    "default_title": "Toggle Movie English Study"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

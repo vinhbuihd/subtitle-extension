@@ -14,12 +14,15 @@ To install it in Chrome or Edge:
 2. Turn on `Developer mode`.
 3. Choose `Load unpacked`.
 4. Select the `extension` folder.
-5. Open the video page, then load your local `.srt` or `.vtt` file from the panel.
+5. Open the video page.
+6. Click the extension icon to show or hide the subtitle panel.
+7. Load your local `.srt` or `.vtt` file from the panel.
 
 ## Features
 
 - Floating current subtitle at the bottom center of the page.
 - Side panel with transcript, current line highlight, and click-to-seek.
+- Click the extension icon to show/hide the UI only when needed.
 - Play/pause, repeat line, loop line, fullscreen toggle, and timeline seek.
 - Quick subtitle timing controls with `Sub -`, `Sub +`, and reset.
 - Local subtitle library via `CC` import and `Lib` management.

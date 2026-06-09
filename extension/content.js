@@ -71,6 +71,7 @@
   let offsetSeconds = 0;
   let loopCurrentLine = false;
   let lastSuggestionCheck = 0;
+  let uiEnabled = false;
   let timerId = 0;
 
   const panel = document.createElement("aside");
@@ -134,6 +135,7 @@
   floatingSub.className = "mes-floating-sub";
   floatingSub.setAttribute("aria-live", "polite");
   document.documentElement.append(floatingSub);
+  panel.hidden = true;
 
   document.addEventListener("fullscreenchange", () => {
     mountFloatingSubForFullscreen();
@@ -165,6 +167,12 @@
   const closeButton = panel.querySelector(".mes-close");
 
   loadSubtitleLibrary();
+
+  chrome.runtime?.onMessage?.addListener((message) => {
+    if (message?.type === "MES_TOGGLE_UI") {
+      setUiEnabled(!uiEnabled);
+    }
+  });
 
   window.addEventListener("message", (event) => {
     const message = event.data;
@@ -322,6 +330,19 @@
   function findVideo() {
     const videos = [...document.querySelectorAll("video")];
     return videos.find((item) => item.duration || item.currentSrc || item.src) || videos[0] || null;
+  }
+
+  function setUiEnabled(nextEnabled) {
+    uiEnabled = nextEnabled;
+    panel.hidden = !uiEnabled;
+    openPanelButton.classList.remove("mes-visible");
+
+    if (!uiEnabled) {
+      updateOverlayText("", false);
+      return;
+    }
+
+    updateActiveSubtitle();
   }
 
   function setFrameOverlay(text, visible) {
@@ -797,6 +818,11 @@
   }
 
   function updateOverlayText(text, visible) {
+    if (!uiEnabled) {
+      text = "";
+      visible = false;
+    }
+
     mountFloatingSubForFullscreen();
     floatingSub.textContent = text;
     floatingSub.classList.toggle("mes-visible", visible);
